@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serpinis Giawa | Dance & Rhythm World</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e', // Vibrant Pink/Rose
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#4c0519',
+                            accent: '#ff2d75',
+                            neon: '#ff007f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0b0712;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* 3D Glassmorphism Cards */
+        .glass-card-3d {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                0 0 25px rgba(244, 63, 94, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .glass-card-3d:hover {
+            transform: translateY(-10px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+            border-color: rgba(255, 45, 117, 0.6);
+            box-shadow: 
+                0 30px 60px rgba(244, 63, 94, 0.25),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                0 0 35px rgba(255, 0, 127, 0.4);
+        }
+
+        /* Pink 3D Floating Sphere Effects */
+        .sphere-3d-1 {
+            background: radial-gradient(circle at 30% 30%, #ff69b4, #e11d48, #4c0519);
+            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.5), inset -10px -10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .sphere-3d-2 {
+            background: radial-gradient(circle at 30% 30%, #ffb6c1, #fb7185, #881337);
+            box-shadow: 0 15px 30px rgba(251, 113, 133, 0.4), inset -10px -10px 20px rgba(0,0,0,0.6);
+        }
+
+        /* Floating Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(5deg); }
+        }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(18px) rotate(-5deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.08); }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+            animation: floatReverse 7s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        /* 3D Button Style */
+        .btn-3d-pink {
+            background: linear-gradient(135deg, #ff2d75 0%, #e11d48 100%);
+            box-shadow: 
+                0 10px 20px rgba(225, 29, 72, 0.4),
+                0 4px 0px #9f1239;
+            transition: all 0.2s ease;
+        }
+
+        .btn-3d-pink:active {
+            transform: translateY(4px);
+            box-shadow: 
+                0 4px 10px rgba(225, 29, 72, 0.4),
+                0 0px 0px #9f1239;
+        }
+
+        .btn-3d-pink:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 14px 28px rgba(225, 29, 72, 0.5),
+                0 6px 0px #9f1239;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f43f5e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff2d75;
+        }
+
+        /* Text Gradient Pink */
+        .text-pink-gradient {
+            background: linear-gradient(135deg, #ffffff 20%, #fda4af 50%, #ff2d75 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-pink-neon {
+            color: #fff;
+            text-shadow: 
+                0 0 7px #fff,
+                0 0 10px #ff2d75,
+                0 0 21px #ff2d75,
+                0 0 42px #e11d48;
+        }
+    </style>
+</head>
+<body class="selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Ambient Glows -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-[120px] pointer-events-none z-0 animate-glow"></div>
+    <div class="fixed bottom-10 right-10 w-96 h-96 bg-brand-400/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed top-1/2 left-10 w-72 h-72 bg-purple-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Floating 3D Music Notes & Orbs in Background -->
+    <div class="fixed top-20 right-[15%] w-14 h-14 sphere-3d-1 rounded-full animate-float pointer-events-none z-0 opacity-80"></div>
+    <div class="fixed top-[60%] left-[5%] w-20 h-20 sphere-3d-2 rounded-full animate-float-reverse pointer-events-none z-0 opacity-70"></div>
+    <div class="fixed bottom-20 right-[8%] w-10 h-10 sphere-3d-1 rounded-full animate-float pointer-events-none z-0 opacity-60"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-3 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/10 flex items-center justify-between shadow-2xl">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-pink-400 flex items-center justify-center text-white font-black text-lg shadow-lg group-hover:scale-110 transition-transform">
+                    SG
+                </div>
+                <span class="font-display font-extrabold text-lg tracking-wide text-white group-hover:text-brand-300 transition-colors">
+                    SERPINIS<span class="text-brand-500">.DANCE</span>
+                </span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-300">
+                <a href="#home" class="hover:text-brand-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-brand-400 transition-colors">Tentang Saya</a>
+                <a href="#reasons" class="hover:text-brand-400 transition-colors">Alasan Suka Dance</a>
+                <a href="#gallery" class="hover:text-brand-400 transition-colors">Galeri</a>
+            </div>
+
+            <!-- Instagram Action CTA -->
+            <a href="https://www.instagram.com/srpns_giiiawaaa22?stkn=MWxibWZ5aHEycmttaQ==" target="_blank" rel="noopener noreferrer" class="btn-3d-pink px-5 py-2.5 rounded-full text-white font-semibold text-xs uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-brands fa-instagram text-base"></i>
+                <span>Instagram</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 z-10">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Text Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm animate-pulse">
+                    <i class="fa-solid fa-compact-disc animate-spin text-brand-400"></i>
+                    <span>Welcome to My Creative Space</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl xl:text-7xl font-black leading-tight tracking-tight">
+                    Hi, Saya <br>
+                    <span class="text-pink-gradient">Serpinis Giawa</span>
+                </h1>
+
+                <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Menari bukan cuma sekadar hobi, tapi bahasa jiwa. Selamat datang di portofolio & blog tari pribadi saya di mana ritme, emosi, dan ekspresi menyatu dalam gerakan.
+                </p>
+
+                <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                    <a href="#reasons" class="btn-3d-pink px-8 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center gap-3 text-white">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Kenapa Saya Suka Dance?</span>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/srpns_giiiawaaa22?stkn=MWxibWZ5aHEycmttaQ==" target="_blank" class="px-6 py-3.5 rounded-xl glass-card-3d font-bold text-sm text-slate-200 hover:text-white flex items-center gap-2">
+                        <i class="fa-brands fa-instagram text-brand-400 text-lg"></i>
+                        <span>@srpns_giiiawaaa22</span>
+                    </a>
+                </div>
+
+                <!-- Quick Stats Badge -->
+                <div class="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 max-w-md mx-auto lg:mx-0">
+                    <div>
+                        <div class="font-display text-2xl font-black text-brand-400">100%</div>
+                        <div class="text-xs text-slate-400 mt-1">Passion & Heart</div>
+                    </div>
+                    <div>
+                        <div class="font-display text-2xl font-black text-brand-300">Rhythm</div>
+                        <div class="text-xs text-slate-400 mt-1">In Every Beat</div>
+                    </div>
+                    <div>
+                        <div class="font-display text-2xl font-black text-pink-400">Express</div>
+                        <div class="text-xs text-slate-400 mt-1">Without Words</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Interactive 3D Card Display -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    
+                    <!-- Decorative Glowing Aura -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-500 to-pink-500 rounded-3xl blur-2xl opacity-40 animate-pulse"></div>
+
+                    <!-- Main 3D Card Container -->
+                    <div class="glass-card-3d p-6 rounded-3xl relative z-10 space-y-6">
+                        
+                        <!-- Top Header inside Card -->
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-500 to-pink-300 p-0.5 shadow-lg">
+                                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                                        <i class="fa-solid fa-music text-brand-400 text-xl"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-white">Serpinis Giawa</h3>
+                                    <p class="text-xs text-brand-300 font-medium"><i class="fa-solid fa-person-dancing mr-1"></i> Dance Enthusiast</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                                LIVE VIBES
+                            </span>
+                        </div>
+
+                        <!-- 3D Decorative Stage Illustration Placeholder -->
+                        <div class="relative h-64 rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-brand-950 to-slate-950 flex flex-col items-center justify-center text-center p-6 border border-white/10 group">
+                            
+                            <!-- Floating Note Icons inside Card Stage -->
+                            <i class="fa-solid fa-music text-brand-500/30 text-6xl absolute top-4 left-6 animate-float"></i>
+                            <i class="fa-solid fa-icons text-pink-400/20 text-5xl absolute bottom-6 right-6 animate-float-reverse"></i>
+
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-brand-600 to-pink-400 flex items-center justify-center shadow-2xl shadow-brand-500/50 mb-4 group-hover:scale-110 transition-transform duration-500">
+                                <i class="fa-solid fa-person-dancing text-4xl text-white"></i>
+                            </div>
+
+                            <p class="font-display font-bold text-lg text-white">"Dance is my lifestyle"</p>
+                            <p class="text-xs text-slate-300 mt-1">Ekspresi Diri & Harmoni Musik</p>
+                        </div>
+
+                        <!-- Music Player Aesthetic Controller -->
+                        <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5 space-y-3">
+                            <div class="flex justify-between text-xs text-slate-400 font-medium">
+                                <span>Current Mood: Rhythm & Flow</span>
+                                <span class="text-brand-400"><i class="fa-solid fa-volume-high"></i> 100%</span>
+                            </div>
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-brand-500 to-pink-300 h-full w-3/4 rounded-full animate-pulse"></div>
+                            </div>
+                            <div class="flex justify-between items-center pt-1">
+                                <button class="text-slate-400 hover:text-white"><i class="fa-solid fa-backward-step"></i></button>
+                                <button class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-white"><i class="fa-solid fa-forward-step"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card-3d rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+                
+                <!-- Background Accent Circle -->
+                <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Avatar / Profile Badge -->
+                    <div class="md:col-span-4 flex justify-center">
+                        <div class="relative">
+                            <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl bg-gradient-to-br from-brand-500 via-pink-500 to-purple-600 p-1.5 shadow-2xl shadow-brand-500/30 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                                <div class="w-full h-full bg-slate-900 rounded-[22px] flex flex-col items-center justify-center p-6 text-center border border-white/10">
+                                    <div class="w-20 h-20 rounded-2xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center mb-3 text-brand-300 text-3xl">
+                                        <i class="fa-solid fa-user-ninja"></i>
+                                    </div>
+                                    <h3 class="font-display font-extrabold text-white text-xl">Serpinis Giawa</h3>
+                                    <p class="text-xs text-brand-400 font-semibold mt-1">Dancer & Creator</p>
+                                </div>
+                            </div>
+                            <!-- Floating Floating Icon -->
+                            <div class="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg animate-bounce">
+                                <i class="fa-solid fa-sparkles text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="md:col-span-8 space-y-4 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 text-brand-400 font-bold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Tentang Saya</span>
+                        </div>
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+                            Menghidupkan Musik Lewat <span class="text-pink-gradient">Gerakan Tubuh</span>
+                        </h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+                            Halo! Saya <strong class="text-white font-semibold">Serpinis Giawa</strong>. Bagi saya, menari bukan sekadar hobi biasa di waktu senggang. Menari adalah dunia tempat saya bisa mengekspresikan diri secara bebas tanpa ada batasan kata-kata.
+                        </p>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+                            Setiap kali irama musik berbunyi, ada energi khusus yang mendorong tubuh saya untuk bergerak dan menyatu dengan setiap ketukan lagu. Lewat website pribadi ini, saya ingin membagikan gairah (*passion*) saya terhadap dunia tarian.
+                        </p>
+
+                        <!-- Highlights Tags -->
+                        <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-2">
+                            <span class="px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-pink-300 font-medium">#DanceLife</span>
+                            <span class="px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-pink-300 font-medium">#ExpressYourself</span>
+                            <span class="px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-pink-300 font-medium">#MusicInMyVeins</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons Section (Main Prompt Content) -->
+    <section id="reasons" class="py-20 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto space-y-12">
+            
+            <!-- Section Title Header -->
+            <div class="text-center space-y-3 max-w-2xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>My Passion</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">
+                    Alasan Saya <span class="text-pink-gradient">Suka Dance</span>
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base font-light">
+                    Dua fondasi utama mengapa tarian memiliki arti yang sangat mendalam dalam hidup saya.
+                </p>
+            </div>
+
+            <!-- 2 Key Reasons Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Reason Card 1: Bentuk Ekspresi Diri -->
+                <div class="glass-card-3d rounded-3xl p-8 sm:p-10 relative flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <!-- Top Icon & Number -->
+                        <div class="flex items-center justify-between">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-pink-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-brand-500/30 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                            <span class="font-display text-4xl font-black text-white/10 group-hover:text-brand-500/30 transition-colors">01</span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="space-y-3">
+                            <h3 class="font-display text-2xl font-extrabold text-white group-hover:text-brand-300 transition-colors">
+                                Bentuk Ekspresi Diri
+                            </h3>
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-brand-500/20 relative">
+                                <i class="fa-solid fa-quote-left text-brand-500/30 text-3xl absolute top-2 left-3"></i>
+                                <p class="text-slate-200 text-sm sm:text-base italic leading-relaxed relative z-10 pl-6">
+                                    "Gak semua hal bisa diungkapkan lewat kata-kata. Lewat dance, aku bisa menyalurkan perasaan, emosi, dan energi lewat setiap gerakan tubuh."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Accent Badge -->
+                    <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-2 text-brand-300 font-semibold">
+                            <i class="fa-solid fa-fire text-brand-400"></i> Emotional Outlet
+                        </span>
+                        <span>Serpinis Giawa</span>
+                    </div>
+                </div>
+
+                <!-- Reason Card 2: Menyatu dengan Musik -->
+                <div class="glass-card-3d rounded-3xl p-8 sm:p-10 relative flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <!-- Top Icon & Number -->
+                        <div class="flex items-center justify-between">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <span class="font-display text-4xl font-black text-white/10 group-hover:text-pink-500/30 transition-colors">02</span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="space-y-3">
+                            <h3 class="font-display text-2xl font-extrabold text-white group-hover:text-pink-300 transition-colors">
+                                Menyatu dengan Musik
+                            </h3>
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-pink-500/20 relative">
+                                <i class="fa-solid fa-quote-left text-pink-500/30 text-3xl absolute top-2 left-3"></i>
+                                <p class="text-slate-200 text-sm sm:text-base italic leading-relaxed relative z-10 pl-6">
+                                    "Dance bikin aku enggak cuma sekadar mendengarkan musik, tapi benar-benar 'merasakan' dan hidup di dalam ritmenya."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Accent Badge -->
+                    <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-2 text-pink-300 font-semibold">
+                            <i class="fa-solid fa-wave-square text-pink-400"></i> Rhythm Connection
+                        </span>
+                        <span>Serpinis Giawa</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Gallery / Moodboard Section -->
+    <section id="gallery" class="py-20 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto space-y-10">
+            <div class="text-center space-y-3">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-photo-film"></i>
+                    <span>Dance Moments</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl font-black text-white">
+                    Galeri & <span class="text-pink-gradient">Suasana Menari</span>
+                </h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto font-light">
+                    Momen-momen inspirasi gerakan, ritme, dan ekspresi tarian.
+                </p>
+            </div>
+
+            <!-- Gallery Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="glass-card-3d rounded-2xl p-4 overflow-hidden group">
+                    <div class="h-48 rounded-xl bg-gradient-to-br from-purple-900 via-brand-900 to-slate-900 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+                        <i class="fa-solid fa-bolt-lightning text-4xl text-brand-400 mb-2 group-hover:scale-125 transition-transform"></i>
+                        <span class="font-display font-bold text-white text-lg">High Energy Moves</span>
+                        <span class="text-xs text-slate-300 mt-1">Spreaading Positive Vibes</span>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-1">
+                        <span class="text-xs text-slate-400">Freestyle Session</span>
+                        <span class="text-xs text-brand-400 font-semibold"><i class="fa-solid fa-heart mr-1"></i> Express</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card-3d rounded-2xl p-4 overflow-hidden group">
+                    <div class="h-48 rounded-xl bg-gradient-to-br from-pink-900 via-brand-950 to-slate-900 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+                        <i class="fa-solid fa-headphones text-4xl text-pink-400 mb-2 group-hover:scale-125 transition-transform"></i>
+                        <span class="font-display font-bold text-white text-lg">Beat & Choreo</span>
+                        <span class="text-xs text-slate-300 mt-1">Living In The Beat</span>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-1">
+                        <span class="text-xs text-slate-400">Rhythm Practice</span>
+                        <span class="text-xs text-pink-400 font-semibold"><i class="fa-solid fa-music mr-1"></i> Flow</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card-3d rounded-2xl p-4 overflow-hidden group sm:col-span-2 lg:col-span-1">
+                    <div class="h-48 rounded-xl bg-gradient-to-br from-rose-900 via-brand-900 to-purple-950 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+                        <i class="fa-solid fa-sparkles text-4xl text-brand-300 mb-2 group-hover:scale-125 transition-transform"></i>
+                        <span class="font-display font-bold text-white text-lg">Stage & Vibe</span>
+                        <span class="text-xs text-slate-300 mt-1">Unleashing Creativity</span>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-1">
+                        <span class="text-xs text-slate-400">Performance</span>
+                        <span class="text-xs text-brand-300 font-semibold"><i class="fa-solid fa-star mr-1"></i> Passion</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Social & Contact CTA Section -->
+    <section class="py-20 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card-3d rounded-3xl p-8 sm:p-14 text-center space-y-8 relative overflow-hidden border-2 border-pink-500/30">
+                
+                <!-- Background Ambient Glow inside CTA -->
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-600/20 via-pink-500/20 to-purple-600/20 blur-xl pointer-events-none"></div>
+
+                <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-brand-500 to-pink-400 flex items-center justify-center text-white text-3xl shadow-2xl shadow-brand-500/50 animate-bounce">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+
+                <div class="space-y-3 relative z-10 max-w-xl mx-auto">
+                    <h2 class="font-display text-3xl sm:text-5xl font-black text-white">
+                        Mari Terhubung di <span class="text-pink-gradient">Instagram!</span>
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base font-light">
+                        Yuk lihat pembaruan tarian, video latihan, dan keseruan aktivitas dance saya sehari-hari secara langsung.
+                    </p>
+                </div>
+
+                <div class="pt-2 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://www.instagram.com/srpns_giiiawaaa22?stkn=MWxibWZ5aHEycmttaQ==" target="_blank" rel="noopener noreferrer" class="btn-3d-pink w-full sm:w-auto px-8 py-4 rounded-2xl text-white font-extrabold text-base tracking-wide flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                        <span>Kunjungi Instagram Saya</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="text-xs text-slate-400 pt-2">
+                    Username: <span class="text-brand-300 font-mono">@srpns_giiiawaaa22</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-slate-500 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="font-display font-bold text-slate-400">
+                SERPINIS GIAWA &copy; <span id="year"></span> | Dance Personal Blog
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span>Designed with 💖 & Pink 3D Aesthetics</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar blur change on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // Interactive 3D tilt effect on glass cards
+        const cards = document.querySelectorAll('.glass-card-3d');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+    </script>
+</body>
+</html>
